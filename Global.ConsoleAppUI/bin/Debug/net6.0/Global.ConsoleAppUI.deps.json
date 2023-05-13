@@ -1,0 +1,62 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Global.ConsoleAppUI/1.0.0": {
+        "dependencies": {
+          "Global.Business": "1.0.0"
+        },
+        "runtime": {
+          "Global.ConsoleAppUI.dll": {}
+        }
+      },
+      "Global.Business/1.0.0": {
+        "dependencies": {
+          "Global.DataAccess": "1.0.0"
+        },
+        "runtime": {
+          "Global.Business.dll": {}
+        }
+      },
+      "Global.Core/1.0.0": {
+        "runtime": {
+          "Global.Core.dll": {}
+        }
+      },
+      "Global.DataAccess/1.0.0": {
+        "dependencies": {
+          "Global.Core": "1.0.0"
+        },
+        "runtime": {
+          "Global.DataAccess.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Global.ConsoleAppUI/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Global.Business/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Global.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Global.DataAccess/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

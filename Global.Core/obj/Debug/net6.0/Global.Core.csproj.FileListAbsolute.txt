@@ -1,0 +1,12 @@
+C:\Users\user\source\repos\FinalProject\Global.Core\bin\Debug\net6.0\Global.Core.deps.json
+C:\Users\user\source\repos\FinalProject\Global.Core\bin\Debug\net6.0\Global.Core.dll
+C:\Users\user\source\repos\FinalProject\Global.Core\bin\Debug\net6.0\Global.Core.pdb
+C:\Users\user\source\repos\FinalProject\Global.Core\obj\Debug\net6.0\Global.Core.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\FinalProject\Global.Core\obj\Debug\net6.0\Global.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\source\repos\FinalProject\Global.Core\obj\Debug\net6.0\Global.Core.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\FinalProject\Global.Core\obj\Debug\net6.0\Global.Core.AssemblyInfo.cs
+C:\Users\user\source\repos\FinalProject\Global.Core\obj\Debug\net6.0\Global.Core.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\FinalProject\Global.Core\obj\Debug\net6.0\Global.Core.dll
+C:\Users\user\source\repos\FinalProject\Global.Core\obj\Debug\net6.0\refint\Global.Core.dll
+C:\Users\user\source\repos\FinalProject\Global.Core\obj\Debug\net6.0\Global.Core.pdb
+C:\Users\user\source\repos\FinalProject\Global.Core\obj\Debug\net6.0\ref\Global.Core.dll
