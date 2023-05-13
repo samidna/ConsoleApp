@@ -5,7 +5,6 @@ using Global.Business.Interfaces;
 using Global.Core.Entities;
 using Global.DataAccess.Contexts;
 using Global.DataAccess.Implementations;
-using System.Xml.Linq;
 
 namespace Global.Business.Services;
 
@@ -43,53 +42,55 @@ public class EmployeeService : IEmployeeService
         {
             throw new NotFoundException($"{employeeCreateDto.departmentName} - doesn't exist");
         }
-        var count = employeeRepository.GetAllByDepartmentId(department.DeparmentId).Count;
+        var count = employeeRepository.GetAllByDepartmentId(department.DepartmentId).Count;
         if (count >= department.EmployeeLimit)
         {
             throw new CapacityNotEnoughException(Helper.Errors["CapacityNotEnoughException"]);
         }
-        Employee employee = new(name,surname,employeeCreateDto.salary, department.DepartmentName);
+        Employee employee = new(name, surname, employeeCreateDto.salary, department.DepartmentName);
         employeeRepository.Add(employee);
     }
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        var employee = DbContext.Employees.Find(emp => emp.EmployeeId == id);
+        if (employee != null)
+        {
+            DbContext.Employees.Remove(employee);
+        }
+        else
+        {
+            throw new NotValidNumberException(Helper.Errors["NotValidNumberException"]);
+        }
     }
-
     public List<Employee> GetAll(int skip, int take)
     {
-        return DbContext.Employees.FindAll(emp=>emp.EmployeeId<=take && emp.EmployeeId>=skip);
+        return DbContext.Employees.FindAll(emp => emp.EmployeeId <= take && emp.EmployeeId >= skip - 1);
     }
 
     public List<Employee> GetByDepartment(string departmentName)
     {
-        throw new NotImplementedException();
-    }
-
-    public List<Employee> GetEmployeeByDepartmentId(int id)
-    {
-        throw new NotImplementedException();
+        return DbContext.Employees.FindAll(emp => emp.DepartmentName == departmentName);
     }
 
     public Employee GetEmployeeById(int id)
     {
-        throw new NotImplementedException();
+        return DbContext.Employees.Find(emp => emp.EmployeeId == id);
     }
 
     public List<Employee> GetEmployeeByName(string name)
     {
-        throw new NotImplementedException();
+        return DbContext.Employees.FindAll(emp => emp.EmployeeName == name);
     }
-
-    public void Update(int id)
-    {
-        throw new NotImplementedException();
-    }
-
     public void Update(int id, EmployeeCreateDto studentCreateDto)
     {
-        throw new NotImplementedException();
+        var employee = DbContext.Employees.Find(emp => emp.EmployeeId == id);
+        if (employee != null)
+        {
+            employee.EmployeeName = studentCreateDto.name;
+            employee.EmployeeSurname = studentCreateDto.surname;
+            employee.Salary = studentCreateDto.salary;
+            employee.DepartmentName = studentCreateDto.departmentName;
+        }
     }
-
 }
 

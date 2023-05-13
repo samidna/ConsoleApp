@@ -10,6 +10,7 @@ namespace Global.Business.Services;
 
 public class DepartmentService : IDepartmentService
 {
+    public EmployeeRepository employeeRepository { get; }
     public DepartmentRepository departmentRepository { get; }
     public CompanyRepository companyRepository { get; }
     public DepartmentService()
@@ -43,26 +44,40 @@ public class DepartmentService : IDepartmentService
 
     public void Delete(string departmentName)
     {
-        throw new NotImplementedException();
+        var department = DbContext.Departments.Find(dep => dep.DepartmentName == departmentName);
+        if (department != null)
+        {
+            DbContext.Departments.Remove(department);
+        }
+        else
+        {
+            throw new NotFoundException("This department doesn't exist");
+        }
+        var count = DbContext.Employees.Count(emp => emp.DepartmentName == departmentName);
+        if (count != 0)
+        {
+            throw new IsNotEmptyException("This department isn't empty");
+        }
     }
-
     public List<Department> GetAll()
     {
         return DbContext.Departments;
     }
-
     public Department GetById(int id)
     {
-        throw new NotImplementedException();
+        return DbContext.Departments.Find(dep => dep.DepartmentId == id);
     }
-
     public Department GetByName(string departmentName)
-    { 
-        return DbContext.Departments.Find(dep => dep.DepartmentName ==departmentName );
+    {
+        return DbContext.Departments.Find(dep => dep.DepartmentName == departmentName);
     }
-
     public void Update(int id, int employeeLimit)
     {
-        throw new NotImplementedException();
+        var department = DbContext.Departments.Find(dep => dep.DepartmentId == id);
+        if (department != null)
+        {
+            
+            
+        }
     }
 }
