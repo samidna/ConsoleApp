@@ -3,6 +3,7 @@ using Global.Business.Exceptions;
 using Global.Business.Helpers;
 using Global.Business.Interfaces;
 using Global.Core.Entities;
+using Global.DataAccess.Contexts;
 using Global.DataAccess.Implementations;
 using System.Xml.Linq;
 
@@ -47,7 +48,7 @@ public class EmployeeService : IEmployeeService
         {
             throw new CapacityNotEnoughException(Helper.Errors["CapacityNotEnoughException"]);
         }
-        Employee employee = new(name,surname,employeeCreateDto.salary,department.DeparmentId);
+        Employee employee = new(name,surname,employeeCreateDto.salary, department.DepartmentName);
         employeeRepository.Add(employee);
     }
     public void Delete(int id)
@@ -57,7 +58,7 @@ public class EmployeeService : IEmployeeService
 
     public List<Employee> GetAll(int skip, int take)
     {
-        throw new NotImplementedException();
+        return DbContext.Employees.FindAll(emp=>emp.EmployeeId<=take && emp.EmployeeId>=skip);
     }
 
     public List<Employee> GetByDepartment(string departmentName)
@@ -89,5 +90,6 @@ public class EmployeeService : IEmployeeService
     {
         throw new NotImplementedException();
     }
+
 }
 

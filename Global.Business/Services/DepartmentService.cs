@@ -2,7 +2,9 @@
 using Global.Business.Helpers;
 using Global.Business.Interfaces;
 using Global.Core.Entities;
+using Global.DataAccess.Contexts;
 using Global.DataAccess.Implementations;
+using System.Xml.Linq;
 
 namespace Global.Business.Services;
 
@@ -26,7 +28,7 @@ public class DepartmentService : IDepartmentService
         {
             throw new AlreadyExistException(Helper.Errors["AlreadyExistException"]);
         }
-        var companyName = companyRepository.GetByName(name);
+        var companyName = companyRepository.GetByName(Name);
         if (companyName == null)
         {
             throw new NotFoundException($"{Name} - doesn't exist");
@@ -46,7 +48,7 @@ public class DepartmentService : IDepartmentService
 
     public List<Department> GetAll()
     {
-        throw new NotImplementedException();
+        return DbContext.Departments;
     }
 
     public Department GetById(int id)
@@ -55,8 +57,8 @@ public class DepartmentService : IDepartmentService
     }
 
     public Department GetByName(string departmentName)
-    {
-        throw new NotImplementedException();
+    { 
+        return DbContext.Departments.Find(dep => dep.DepartmentName ==departmentName );
     }
 
     public void Update(int id, int employeeLimit)

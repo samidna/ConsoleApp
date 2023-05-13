@@ -1,5 +1,4 @@
 ﻿using Global.Core.Entities;
-using Global.Core.Interfaces;
 using Global.DataAccess.Contexts;
 using Global.DataAccess.Interfaces;
 

@@ -1,5 +1,4 @@
 ﻿using Global.Core.Interfaces;
-
 namespace Global.Core.Entities;
 
 public class Employee : IEntity
@@ -10,20 +9,21 @@ public class Employee : IEntity
     public string EmployeeSurname { get; set; }
     public double Salary { get; set; }
     public int DepartmentId { get; set; }
+    public string DepartmentName { get; set; }
     public Employee()
     {
         EmployeeId = _id;
         _id++;
     }
-    public Employee(string name, string surname, double salary,int departmentId) : this()
+    public Employee(string name, string surname, double salary, string departmentName) : this()
     {
         EmployeeName = name;
         EmployeeSurname = surname;
         Salary = salary;
-        DepartmentId = departmentId;
+        DepartmentName = departmentName;
     }
     public string EmployeeInfo()
     {
-        return $"Name : {EmployeeName}, Surname : {EmployeeSurname},Salary : {Salary}";
+        return $"Name : {EmployeeName}, Surname : {EmployeeSurname}, Salary : {Salary}";
     }
 }
