@@ -4,7 +4,6 @@ using Global.Business.Interfaces;
 using Global.Core.Entities;
 using Global.DataAccess.Contexts;
 using Global.DataAccess.Implementations;
-using System.Xml.Linq;
 
 namespace Global.Business.Services;
 
@@ -41,7 +40,6 @@ public class DepartmentService : IDepartmentService
         Department department = new Department(departmentName, employeeLimit, companyName.CompanyId);
         departmentRepository.Add(department);
     }
-
     public void Delete(string departmentName)
     {
         var department = DbContext.Departments.Find(dep => dep.DepartmentName == departmentName);
@@ -65,6 +63,11 @@ public class DepartmentService : IDepartmentService
     }
     public Department GetById(int id)
     {
+        var count = DbContext.Departments.Count();
+        if (count < id)
+        {
+            throw new NotFoundException("This Id doesn't exist");
+        }
         return DbContext.Departments.Find(dep => dep.DepartmentId == id);
     }
     public Department GetByName(string departmentName)
@@ -76,8 +79,7 @@ public class DepartmentService : IDepartmentService
         var department = DbContext.Departments.Find(dep => dep.DepartmentId == id);
         if (department != null)
         {
-            
-            
+            department.EmployeeLimit = employeeLimit;
         }
     }
 }

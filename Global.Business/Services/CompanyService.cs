@@ -2,7 +2,9 @@
 using Global.Business.Helpers;
 using Global.Business.Interfaces;
 using Global.Core.Entities;
+using Global.DataAccess.Contexts;
 using Global.DataAccess.Implementations;
+using System.Xml.Linq;
 
 namespace Global.Business.Services;
 
@@ -28,19 +30,34 @@ public class CompanyService : ICompanyService
         Company company = new Company(companyName);
         companyRepository.Add(company);
     }
-
     public void Delete(string name)
     {
-        throw new NotImplementedException();
+        var company = DbContext.Companies.Find(c => c.CompanyName == name);
+        if (company != null)
+        {
+            DbContext.Companies.Remove(company);
+        }
+        else
+        {
+            throw new NotFoundException("This company doesn't exist");
+        }
+        var count = DbContext.Companies.Count(c => c.CompanyName==name);
+        if (count != 0)
+        {
+            throw new IsNotEmptyException("This company isn't empty");
+        }
     }
-
     public List<Company> GetAll()
     {
         return companyRepository.GetAll();
     }
-
     public Company GetById(int id)
     {
-        throw new NotImplementedException();
+        var count = DbContext.Companies.Count();
+        if (count < id)
+        {
+            throw new NotFoundException("This Id doesn't exist");
+        }
+        return DbContext.Companies.Find(c => c.CompanyId == id);
     }
 }

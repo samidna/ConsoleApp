@@ -6,7 +6,6 @@ namespace Global.DataAccess.Implementations;
 
 public class CompanyRepository : IRepository<Company>
 {
-
     public void Add(Company entity)
     {
         DbContext.Companies.Add(entity);

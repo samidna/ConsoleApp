@@ -8,10 +8,10 @@ public class Department : IEntity
     public string DepartmentName { get; set; }
     public int EmployeeLimit;
     public int CompanyId { get; set; }
-    public int DeparmentId { get; }
+    public int DepartmentId { get; }
     public Department()
     {
-        DeparmentId = _id;
+        DepartmentId = _id;
         _id++;
     }
     public Department(string name, int employeelimit,int companyId) : this()

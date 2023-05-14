@@ -64,21 +64,36 @@ public class EmployeeService : IEmployeeService
     }
     public List<Employee> GetAll(int skip, int take)
     {
-        return DbContext.Employees.FindAll(emp => emp.EmployeeId <= take && emp.EmployeeId >= skip - 1);
+        return DbContext.Employees.FindAll(emp => emp.EmployeeId <= take && emp.EmployeeId >= skip);
     }
 
     public List<Employee> GetByDepartment(string departmentName)
     {
+        var dep = DbContext.Departments.Find(dep => dep.DepartmentName == departmentName);
+        if (dep == null)
+        {
+            throw new NotFoundException("This Department doesn't exist");
+        }
         return DbContext.Employees.FindAll(emp => emp.DepartmentName == departmentName);
     }
 
     public Employee GetEmployeeById(int id)
     {
+        var count = DbContext.Employees.Count(emp => emp.EmployeeId == id);
+        if (count < id)
+        {
+            throw new NotFoundException("This Id doesn't exist");
+        }
         return DbContext.Employees.Find(emp => emp.EmployeeId == id);
     }
 
     public List<Employee> GetEmployeeByName(string name)
     {
+        var tempname = employeeRepository.GetByName(name);
+        if (tempname == null)
+        {
+            throw new NotFoundException("This employee was not found");
+        }
         return DbContext.Employees.FindAll(emp => emp.EmployeeName == name);
     }
     public void Update(int id, EmployeeCreateDto studentCreateDto)
