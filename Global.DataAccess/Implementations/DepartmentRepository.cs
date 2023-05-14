@@ -18,13 +18,13 @@ public class DepartmentRepository : IRepository<Department>
 
     public void Update(Department entity)
     {
-        Department dep = DbContext.Departments.Find(dep => dep.DeparmentId == entity.DeparmentId);
+        Department dep = DbContext.Departments.Find(dep => dep.DepartmentId == entity.DepartmentId);
         dep.DepartmentName = entity.DepartmentName;
         dep.EmployeeLimit = entity.EmployeeLimit;   
     }
     public Department? Get(int id)
     {
-        return DbContext.Departments.Find(dep=>dep.DeparmentId==id);
+        return DbContext.Departments.Find(dep=>dep.DepartmentId==id);
     }
     public List<Department> GetAll()
     {

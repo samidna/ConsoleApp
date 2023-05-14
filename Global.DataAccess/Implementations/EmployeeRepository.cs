@@ -35,7 +35,7 @@ public class EmployeeRepository : IRepository<Employee>
 
     public Employee? GetByName(string name)
     {
-        throw new NotImplementedException();
+        return DbContext.Employees.Find(emp => emp.EmployeeName == name);
     }
 
     public List<Employee> GetAllByName(string name)
