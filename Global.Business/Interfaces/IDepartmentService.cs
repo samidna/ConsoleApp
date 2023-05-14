@@ -6,7 +6,7 @@ public interface IDepartmentService
 {
     void Create(string departmentName,string companyName,int employeeLimit);
     void Delete(string departmentName);
-    void Update(int id, int employeeLimit);
+    void UpdateDepartment(string name,string newname, int employeeLimit);
     Department GetByName(string departmentName);
     Department GetById(int id);
     List<Department> GetAll();  

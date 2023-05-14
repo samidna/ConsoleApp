@@ -79,12 +79,18 @@ public class DepartmentService : IDepartmentService
         }
         return department;
     }
-    public void Update(int id, int employeeLimit)
+    public void UpdateDepartment(string name,string newname, int employeeLimit)
     {
-        var department = DbContext.Departments.Find(dep => dep.DepartmentId == id);
+        var department = DbContext.Departments.Find(dep => dep.DepartmentName == name);
         if (department != null)
         {
+            department.DepartmentName = newname;
             department.EmployeeLimit = employeeLimit;
         }
+        else
+        {
+            throw new NotFoundException("This department wasn't found");
+        }
+
     }
 }

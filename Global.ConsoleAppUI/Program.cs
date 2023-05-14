@@ -1,5 +1,7 @@
 ﻿using Global.Business.DTOs.EmployeeDto;
 using Global.Business.Services;
+using Global.Core.Entities;
+using Global.DataAccess.Contexts;
 using Global.DataAccess.Implementations;
 
 EmployeeService employeeService = new EmployeeService();
@@ -19,6 +21,8 @@ departmentService.Create("Maliyye","Audi",15);
 departmentService.Create("Maliyye1", "BMW", 11);
 departmentService.Create("Maliyye2", "Porshce", 12);
 departmentService.Create("Maliyye3", "Porshce", 16);
+departmentService.Create("Maliye", "BMW", 15);
+departmentService.Create("Maliye1", "Audi", 15);
 
 
 //Console.WriteLine("Second");
@@ -29,9 +33,7 @@ departmentService.Create("Maliyye3", "Porshce", 16);
 //}
 
 //Console.WriteLine("Departments:");
-departmentService.Create("Maliye", "BMW", 15);
 //Console.WriteLine("Departments1:");
-departmentService.Create("Maliye1", "Audi", 15);
 //foreach (var department in departmentService.GetAll())
 //{
 //    Console.WriteLine(department.DepartmentName);
@@ -90,6 +92,13 @@ Console.WriteLine("ss");
 //    Console.WriteLine(emp.DepartmentName);
 //}
 //Console.WriteLine(employeeRepository.Get(1).DepartmentName);
+
+//departmentService.UpdateDepartment("Maliyye","Maliyye7", 35);
+//foreach (var dep in DbContext.Departments)
+//{
+//    Console.WriteLine(dep.DepartmentName);
+//}
+
 
 
 

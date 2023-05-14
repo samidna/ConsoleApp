@@ -14,10 +14,14 @@ public class Department : IEntity
         DepartmentId = _id;
         _id++;
     }
-    public Department(string name, int employeelimit,int companyId) : this()
+    public Department(string name, int employeelimit, int companyId) : this()
     {
         DepartmentName = name;
         EmployeeLimit = employeelimit;
         CompanyId = companyId;
+    }
+    public string DepartmentInfo()
+    {
+        return $"Id : {DepartmentId}, Name : {DepartmentName}";
     }
 }
