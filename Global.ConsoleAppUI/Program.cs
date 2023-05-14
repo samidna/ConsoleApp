@@ -29,9 +29,9 @@ departmentService.Create("Maliyye3", "Porshce", 16);
 //}
 
 //Console.WriteLine("Departments:");
-//departmentService.Create("Maliye", "BMW", 15);
+departmentService.Create("Maliye", "BMW", 15);
 //Console.WriteLine("Departments1:");
-//departmentService.Create("Maliye1", "Audi", 15);
+departmentService.Create("Maliye1", "Audi", 15);
 //foreach (var department in departmentService.GetAll())
 //{
 //    Console.WriteLine(department.DepartmentName);
@@ -76,7 +76,20 @@ Console.WriteLine("ss");
 //Console.WriteLine("a");
 //employeeService.GetByDepartment("Maliyye");
 //employeeService.GetEmployeeByName("Samid");
-
+//var dep=departmentService.GetByName("Maliyye");
+//Console.WriteLine(dep);
+//Console.WriteLine(departmentService.GetById(6).DepartmentName);
+//employeeService.UpdateEmployeeSalary(5, 30000);
+//foreach (var emp in DbContext.Employees)
+//{
+//    Console.WriteLine(emp.Salary);
+//}
+//employeeService.EmployeeTransfer(1, "Maliyye");
+//foreach (var emp in DbContext.Employees)
+//{
+//    Console.WriteLine(emp.DepartmentName);
+//}
+//Console.WriteLine(employeeRepository.Get(1).DepartmentName);
 
 
 

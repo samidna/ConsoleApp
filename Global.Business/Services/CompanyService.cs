@@ -4,7 +4,6 @@ using Global.Business.Interfaces;
 using Global.Core.Entities;
 using Global.DataAccess.Contexts;
 using Global.DataAccess.Implementations;
-using System.Xml.Linq;
 
 namespace Global.Business.Services;
 

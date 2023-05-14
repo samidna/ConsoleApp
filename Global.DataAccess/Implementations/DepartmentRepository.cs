@@ -30,7 +30,6 @@ public class DepartmentRepository : IRepository<Department>
     {
         return DbContext.Departments;
     }
-
     public Department? GetByName(string name)
     {
         return DbContext.Departments.Find(dep => dep.DepartmentName == name);

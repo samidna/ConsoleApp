@@ -106,6 +106,39 @@ public class EmployeeService : IEmployeeService
             employee.Salary = studentCreateDto.salary;
             employee.DepartmentName = studentCreateDto.departmentName;
         }
+        else
+        {
+            throw new NotFoundException("This Id wasn't found");
+        }
+    }
+    public void UpdateEmployeeSalary(int id, double salary)
+    {
+        var employee = DbContext.Employees.Find(emp => emp.EmployeeId == id);
+        if (employee != null)
+        {
+            employee.Salary = salary;
+        }
+        else
+        {
+            throw new NotFoundException("This Id wasn't found");
+        }
+    }
+    public void EmployeeTransfer(int id, string departmentName)
+    {
+        var emp = employeeRepository.Get(id);
+        var dep = DbContext.Departments.Find(dep => dep.DepartmentName == departmentName);
+        if (emp != null)
+        {
+            emp.DepartmentName = departmentName;
+        }
+        else
+        {
+            throw new NotFoundException("This Id wasn't found");
+        }
+        if (dep == null)
+        {
+            throw new NotFoundException("This department name wasn't found");
+        }
     }
 }
 

@@ -64,7 +64,7 @@ public class DepartmentService : IDepartmentService
     public Department GetById(int id)
     {
         var count = DbContext.Departments.Count();
-        if (count < id)
+        if (count <= id)
         {
             throw new NotFoundException("This Id doesn't exist");
         }
@@ -72,7 +72,12 @@ public class DepartmentService : IDepartmentService
     }
     public Department GetByName(string departmentName)
     {
-        return DbContext.Departments.Find(dep => dep.DepartmentName == departmentName);
+        var department = DbContext.Departments.Find(dep => dep.DepartmentName == departmentName);
+        if (department == null)
+        {
+            throw new NotFoundException("This name wasn't found");
+        }
+        return department;
     }
     public void Update(int id, int employeeLimit)
     {
