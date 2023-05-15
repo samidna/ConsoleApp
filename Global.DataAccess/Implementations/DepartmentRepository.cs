@@ -14,7 +14,6 @@ public class DepartmentRepository : IRepository<Department>
     {
         DbContext.Departments.Remove(entity);   
     }
-
     public void Update(Department entity)
     {
         Department dep = DbContext.Departments.Find(dep => dep.DepartmentId == entity.DepartmentId);
@@ -33,7 +32,14 @@ public class DepartmentRepository : IRepository<Department>
     {
         return DbContext.Departments.Find(dep => dep.DepartmentName == name);
     }
-
+    public List<Department> GetDepartmentsByCompany(int companyId)
+    {
+        return DbContext.Departments.FindAll(dep => dep.CompanyId == companyId);
+    }
+    public List<Employee> GetDepartmentEmployees(string departmentName)
+    {
+        return DbContext.Employees.FindAll(emp=>emp.DepartmentName==departmentName);
+    }
     public List<Department> GetAllByName(string name)
     {
         return DbContext.Departments.FindAll(dep => dep.DepartmentName == name);

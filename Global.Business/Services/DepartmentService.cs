@@ -1,9 +1,11 @@
-﻿using Global.Business.Exceptions;
+﻿using Global.Business.DTOs.EmployeeDto;
+using Global.Business.Exceptions;
 using Global.Business.Helpers;
 using Global.Business.Interfaces;
 using Global.Core.Entities;
 using Global.DataAccess.Contexts;
 using Global.DataAccess.Implementations;
+using System.Xml.Linq;
 
 namespace Global.Business.Services;
 
@@ -72,25 +74,25 @@ public class DepartmentService : IDepartmentService
     }
     public Department GetByName(string departmentName)
     {
-        var department = DbContext.Departments.Find(dep => dep.DepartmentName == departmentName);
+        var department = departmentRepository.GetByName(departmentName);
         if (department == null)
         {
             throw new NotFoundException("This name wasn't found");
         }
         return department;
     }
-    public void UpdateDepartment(string name,string newname, int employeeLimit)
+    public void UpdateDepartment(string name, string newname, int employeeLimit)
     {
-        var department = DbContext.Departments.Find(dep => dep.DepartmentName == name);
+        var department = departmentRepository.GetByName(name);
         string newnametrim = newname.Trim();
-        var count = employeeRepository.GetAll().Count;
-        if (count<employeeLimit)
+        var count = DbContext.Employees.Count;
+        if (count > employeeLimit)
         {
             throw new OutOfLimitException(Helper.Errors["OutOfLimitException"]);
         }
         foreach (var dep in DbContext.Departments)
         {
-            if (dep.DepartmentName.ToLower() == newnametrim.ToLower())
+            if (dep.DepartmentName == newnametrim)
             {
                 throw new AlreadyExistException(Helper.Errors["AlreadyExistException"]);
             }
@@ -104,5 +106,14 @@ public class DepartmentService : IDepartmentService
         {
             throw new NotFoundException("This department wasn't found");
         }
+    }
+    public void Add(Employee employee, string departmentName)
+    {
+        var department = departmentRepository.GetByName(departmentName);
+        if (department != null)
+        {
+            throw new NotFoundException("This department wasn't found");
+        }
+        employeeRepository.Add(employee);
     }
 }

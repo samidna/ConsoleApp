@@ -17,7 +17,6 @@ public class EmployeeService : IEmployeeService
         employeeRepository = new EmployeeRepository();
         departmentRepository = new DepartmentRepository();
     }
-
     public void Create(EmployeeCreateDto employeeCreateDto)
     {
         var name = employeeCreateDto.name.Trim();
@@ -47,7 +46,7 @@ public class EmployeeService : IEmployeeService
         {
             throw new CapacityNotEnoughException(Helper.Errors["CapacityNotEnoughException"]);
         }
-        Employee employee = new(name, surname, employeeCreateDto.salary, department.DepartmentName);
+        Employee employee = new(name, surname, employeeCreateDto.salary, employeeCreateDto.departmentName);
         employeeRepository.Add(employee);
     }
     public void Delete(int id)
@@ -94,15 +93,15 @@ public class EmployeeService : IEmployeeService
         }
         return DbContext.Employees.FindAll(emp => emp.EmployeeName == name);
     }
-    public void Update(int id, EmployeeCreateDto studentCreateDto)
+    public void Update(int id, EmployeeCreateDto employeeCreateDto)
     {
         var employee = DbContext.Employees.Find(emp => emp.EmployeeId == id);
         if (employee != null)
         {
-            employee.EmployeeName = studentCreateDto.name;
-            employee.EmployeeSurname = studentCreateDto.surname;
-            employee.Salary = studentCreateDto.salary;
-            employee.DepartmentName = studentCreateDto.departmentName;
+            employee.EmployeeName = employeeCreateDto.name;
+            employee.EmployeeSurname = employeeCreateDto.surname;
+            employee.Salary = employeeCreateDto.salary;
+            employee.DepartmentName = employeeCreateDto.departmentName;
         }
         else
         {

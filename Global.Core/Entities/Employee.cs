@@ -10,6 +10,7 @@ public class Employee : IEntity
     public double Salary { get; set; }
     public int DepartmentId { get; set; }
     public string DepartmentName { get; set; }
+    public string CompanyName { get; }
     public Employee()
     {
         EmployeeId = _id;

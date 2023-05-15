@@ -9,6 +9,7 @@ namespace Global.Business.Services;
 
 public class CompanyService : ICompanyService
 {
+    public DepartmentRepository departmentRepository { get; }
     public CompanyRepository companyRepository { get; }
     public CompanyService()
     {
@@ -17,7 +18,7 @@ public class CompanyService : ICompanyService
     public void Create(string companyName)
     {
         var exist = companyRepository.GetByName(companyName);
-        if(exist != null)
+        if (exist != null)
         {
             throw new AlreadyExistException(Helper.Errors["AlreadyExistException"]);
         }
@@ -31,20 +32,12 @@ public class CompanyService : ICompanyService
     }
     public void Delete(string name)
     {
-        var company = DbContext.Companies.Find(c => c.CompanyName == name);
-        if (company != null)
-        {
-            companyRepository.Delete(company);
-        }
-        else
+        var company = companyRepository.GetByName(name);
+        if (company == null)
         {
             throw new NotFoundException("This company doesn't exist");
         }
-        var count = DbContext.Companies.Count(c => c.CompanyName==name);
-        if (count != 0)
-        {
-            throw new IsNotEmptyException("This company isn't empty");
-        }
+        companyRepository.Delete(company);
     }
     public List<Company> GetAll()
     {
@@ -52,7 +45,7 @@ public class CompanyService : ICompanyService
     }
     public Company GetById(int id)
     {
-        var count = DbContext.Companies.Count();
+        var count = companyRepository.GetAll().;
         if (count < id)
         {
             throw new NotFoundException("This Id doesn't exist");

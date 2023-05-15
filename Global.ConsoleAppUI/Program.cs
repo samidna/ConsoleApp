@@ -8,6 +8,7 @@ EmployeeService employeeService = new EmployeeService();
 DepartmentService departmentService = new DepartmentService();
 CompanyService companyService = new CompanyService();
 EmployeeRepository employeeRepository = new EmployeeRepository();
+DepartmentRepository departmentRepository = new DepartmentRepository();
 
 
 
@@ -15,16 +16,17 @@ EmployeeRepository employeeRepository = new EmployeeRepository();
 companyService.Create("Audi");
 companyService.Create("BMW");
 companyService.Create("Porshce");
+companyService.Create("Samid");
 
 
-departmentService.Create("Maliyye","Audi",15);
+
+departmentService.Create("Maliyye", "Audi", 15);
 departmentService.Create("Maliyye1", "BMW", 11);
 departmentService.Create("Maliyye2", "Porshce", 12);
 departmentService.Create("Maliyye3", "Porshce", 16);
 departmentService.Create("Maliye", "BMW", 15);
 departmentService.Create("Maliye1", "Audi", 15);
-
-
+//Console.WriteLine(departmentService.GetByName("Maliye17").DepartmentName);
 //Console.WriteLine("Second");
 //Console.WriteLine("get all companies");
 //foreach (var companies in companyService.GetAll())
@@ -40,7 +42,7 @@ departmentService.Create("Maliye1", "Audi", 15);
 //}
 
 //Console.WriteLine("Create student:");
-EmployeeCreateDto s1 = new("Adil", "Tehranli", 15000,"Maliyye");
+EmployeeCreateDto s1 = new("Adil", "Tehranli", 15000, "Maliyye");
 EmployeeCreateDto s2 = new("Kenan", "Qehremanov", 15000, "Maliyye1");
 EmployeeCreateDto s3 = new("Samid", "Saitli", 15000, "Maliyye");
 EmployeeCreateDto s4 = new("Samid", "Saitli", 15000, "Maliyye2");
@@ -50,10 +52,18 @@ employeeService.Create(s2);
 employeeService.Create(s3);
 employeeService.Create(s4);
 employeeService.Create(s5);
-Console.WriteLine("ss");
+
+//departmentRepository.GetDepartmentEmployees("Maliyye");
+//foreach (var emp in departmentRepository.GetDepartmentEmployees("Maliyye"))
+//{
+//    Console.WriteLine(emp.EmployeeInfo());
+//}
+
+//employeeRepository.GetAllByDepartmentId(0);
 //departmentService.Delete("Maliyye1");
 //var department= departmentService.GetById(0);
 //Console.WriteLine(department.DepartmentName);
+//companyService.Delete("BMW");
 
 //departmentService.Delete("Maliyye");
 //employeeService.Delete(10);
@@ -93,7 +103,7 @@ Console.WriteLine("ss");
 //}
 //Console.WriteLine(employeeRepository.Get(1).DepartmentName);
 
-//departmentService.UpdateDepartment("Maliyye","Maliyye7", 35);
+//departmentService.UpdateDepartment("Maliyye", "Maliyye7", 1);
 //foreach (var dep in DbContext.Departments)
 //{
 //    Console.WriteLine(dep.DepartmentName);
@@ -104,8 +114,6 @@ Console.WriteLine("ss");
 //{
 //    Console.WriteLine(emp.EmployeeName);
 //}
-
-
 
 
 

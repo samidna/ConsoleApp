@@ -33,10 +33,8 @@ public class CompanyRepository : IRepository<Company>
     {
         return DbContext.Companies;
     }
-
     public List<Company> GetAllByName(string name)
     {
-        return DbContext.Companies.FindAll(c => c.CompanyName == name);
-
+        return DbContext.Companies.FindAll(c => c.CompanyName.ToLower() == name);
     }
 }
