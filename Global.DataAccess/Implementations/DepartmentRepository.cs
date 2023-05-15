@@ -10,7 +10,6 @@ public class DepartmentRepository : IRepository<Department>
     {
         DbContext.Departments.Add(entity);  
     }
-
     public void Delete(Department entity)
     {
         DbContext.Departments.Remove(entity);   

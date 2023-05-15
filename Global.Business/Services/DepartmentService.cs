@@ -82,6 +82,19 @@ public class DepartmentService : IDepartmentService
     public void UpdateDepartment(string name,string newname, int employeeLimit)
     {
         var department = DbContext.Departments.Find(dep => dep.DepartmentName == name);
+        string newnametrim = newname.Trim();
+        var count = employeeRepository.GetAll().Count;
+        if (count<employeeLimit)
+        {
+            throw new OutOfLimitException(Helper.Errors["OutOfLimitException"]);
+        }
+        foreach (var dep in DbContext.Departments)
+        {
+            if (dep.DepartmentName.ToLower() == newnametrim.ToLower())
+            {
+                throw new AlreadyExistException(Helper.Errors["AlreadyExistException"]);
+            }
+        }
         if (department != null)
         {
             department.DepartmentName = newname;
@@ -91,6 +104,5 @@ public class DepartmentService : IDepartmentService
         {
             throw new NotFoundException("This department wasn't found");
         }
-
     }
 }

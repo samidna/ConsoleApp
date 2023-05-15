@@ -34,7 +34,7 @@ public class CompanyService : ICompanyService
         var company = DbContext.Companies.Find(c => c.CompanyName == name);
         if (company != null)
         {
-            DbContext.Companies.Remove(company);
+            companyRepository.Delete(company);
         }
         else
         {

@@ -55,7 +55,7 @@ public class EmployeeService : IEmployeeService
         var employee = DbContext.Employees.Find(emp => emp.EmployeeId == id);
         if (employee != null)
         {
-            DbContext.Employees.Remove(employee);
+            employeeRepository.Delete(employee);
         }
         else
         {
@@ -66,7 +66,6 @@ public class EmployeeService : IEmployeeService
     {
         return DbContext.Employees.FindAll(emp => emp.EmployeeId <= take && emp.EmployeeId >= skip);
     }
-
     public List<Employee> GetByDepartment(string departmentName)
     {
         var dep = DbContext.Departments.Find(dep => dep.DepartmentName == departmentName);
@@ -86,7 +85,6 @@ public class EmployeeService : IEmployeeService
         }
         return DbContext.Employees.Find(emp => emp.EmployeeId == id);
     }
-
     public List<Employee> GetEmployeeByName(string name)
     {
         var tempname = employeeRepository.GetByName(name);

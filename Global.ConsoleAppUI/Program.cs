@@ -98,6 +98,13 @@ Console.WriteLine("ss");
 //{
 //    Console.WriteLine(dep.DepartmentName);
 //}
+//departmentService.UpdateDepartment("Maliyye", "Maliyye10", 15);
+//employeeService.Delete(1);
+//foreach (var emp in DbContext.Employees)
+//{
+//    Console.WriteLine(emp.EmployeeName);
+//}
+
 
 
 
